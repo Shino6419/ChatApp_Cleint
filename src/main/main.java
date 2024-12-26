@@ -8,6 +8,7 @@ import com.formdev.flatlaf.intellijthemes.FlatArcIJTheme;
 import event.EventMain;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import model.Model_User_Account;
 import service.Service;
 import swing.ComponentResizer;
 
@@ -46,6 +47,16 @@ public class main extends javax.swing.JFrame {
                 home.setVisible(true);
                 login.setVisible(false);
                 Service.getInstance().getClient().emit("list_user", Service.getInstance().getUser().getUserID());
+            }
+
+            @Override
+            public void selectUser(Model_User_Account user) {
+                home.setUser(user);
+            }
+
+            @Override
+            public void updateUser(Model_User_Account user) {
+                home.updateUser(user);
             }
         });
         PublicEvent.getInstance().addEventImageView(new EventImageView() {
@@ -98,7 +109,7 @@ public class main extends javax.swing.JFrame {
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
+                .addComponent(body, javax.swing.GroupLayout.PREFERRED_SIZE, 798, Short.MAX_VALUE)
                 .addContainerGap())
         );
         backgroundLayout.setVerticalGroup(

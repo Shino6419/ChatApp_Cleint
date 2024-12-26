@@ -1,6 +1,7 @@
 
 package component;
 
+import event.PublicEvent;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -12,6 +13,7 @@ public class Item_People extends javax.swing.JPanel {
     public Model_User_Account getUser() {
         return user;
     }
+    private boolean mouseOver;
     private final Model_User_Account user;
     
     public Item_People(Model_User_Account user) {
@@ -26,17 +28,24 @@ public class Item_People extends javax.swing.JPanel {
         activeStatus.setActive(user.isStatus());
     }
     private void init(){
-        setBackground(new Color(242,242,242));
         addMouseListener(new MouseAdapter(){
             @Override
-            public void mouseEntered(MouseEvent e) {
-               setBackground(new Color(230,230,230));
+            public void mouseEntered(MouseEvent me) {
+                setBackground(new Color(230, 230, 230));
+                mouseOver = true;
             }
 
             @Override
-            public void mouseExited(MouseEvent e) {
-                
-                setBackground(new Color(242,242,242));
+            public void mouseExited(MouseEvent me) {
+                setBackground(new Color(242, 242, 242));
+                mouseOver = false;
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent me) {
+                if (mouseOver) {
+                    PublicEvent.getInstance().getEventMain().selectUser(user);
+                }
             }
             
         });
@@ -73,8 +82,8 @@ public class Item_People extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lb, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lb1)
-                        .addGap(5, 5, 5)
+                        .addComponent(lb1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(activeStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())

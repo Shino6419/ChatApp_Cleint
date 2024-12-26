@@ -13,12 +13,23 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import model.Model_User_Account;
 import net.miginfocom.swing.MigLayout;
 import swing.JIMSendTextPane;
 import swing.ScrollBar;
 
 public class Chat_Bottom extends javax.swing.JPanel {
+    
+    public Model_User_Account getUser() {
+        return user;
+    }
 
+    public void setUser(Model_User_Account user) {
+        this.user = user;
+    }
+
+    private Model_User_Account user;
+    
     public Chat_Bottom() {
         initComponents();
         init();
